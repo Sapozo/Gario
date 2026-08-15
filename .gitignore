@@ -1,0 +1,31 @@
+# Godot 4+ specific ignores
+.godot/
+.import/
+
+# Arquivos temporários do editor
+*.tmp
+*.import
+
+# Cache de build
+export.cfg
+export_presets.cfg
+
+# Arquivos do sistema operacional
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE / Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Arquivos de build/export
+builds/
+exports/
+*.exe
+*.pck
+*.apk
+*.ipa
