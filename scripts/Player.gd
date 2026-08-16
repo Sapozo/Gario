@@ -10,6 +10,8 @@ extends CharacterBody2D
 @export var coyote_time: float = 0.1
 # Base do JumpBuffering
 @export var jump_buffer_time: float = 0.1
+# Base do Variable Jump Height
+@export var jump_cut_multiplier: float = 0.3
 
 # Referência do nó dentro do código
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
@@ -35,16 +37,15 @@ func _apply_gravity(delta: float) -> void:
 		velocity.y += gravity * delta
 
 
-## Detecta o coyote time, o input de pulo e aplica velocidade vertical
+## Detecta o jump buffering, o coyote time, o input de pulo e aplica função de pulo
 func _handle_jump(delta: float) -> void:
-	buffer_timer -= max(0.0, buffer_timer - delta)
+	buffer_timer = max(0.0, buffer_timer - delta)
 	if Input.is_action_just_pressed("jump"):
 		buffer_timer = jump_buffer_time
 		
 	if is_on_floor() and buffer_timer > 0:
-		velocity.y = jump_velocity
-		buffer_timer = 0.0
-
+		_perform_jump()
+		return
 	
 	if is_on_floor():
 		coyote_timer = coyote_time
@@ -52,10 +53,16 @@ func _handle_jump(delta: float) -> void:
 		coyote_timer = max(0.0, coyote_timer - delta)
 		
 	if Input.is_action_just_pressed("jump") and coyote_timer > 0:
-		velocity.y = jump_velocity
-		coyote_timer = 0.0
+		_perform_jump()
 		
-	
+	if Input.is_action_just_released("jump") and velocity.y < 0:
+		velocity.y *= jump_cut_multiplier
+
+# Realiza o pulo
+func _perform_jump() -> void:
+	velocity.y = jump_velocity
+	coyote_timer = 0.0
+	buffer_timer = 0.0
 
 
 ## Movimento lateral baseado no input
@@ -80,3 +87,8 @@ func _handle_animation() -> void:
 			animated_sprite.play("jump")
 		else:
 			animated_sprite.play("fall")
+
+
+
+	
+	
