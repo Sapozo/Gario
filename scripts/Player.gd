@@ -8,11 +8,14 @@ extends CharacterBody2D
 @export var gravity: float = 980.0
 # Base do CoyoteTime
 @export var coyote_time: float = 0.1
+# Base do JumpBuffering
+@export var jump_buffer_time: float = 0.1
 
 # Referência do nó dentro do código
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 
 var coyote_timer: float = 0.0
+var buffer_timer: float = 0.0
 
 
 
@@ -34,6 +37,15 @@ func _apply_gravity(delta: float) -> void:
 
 ## Detecta o coyote time, o input de pulo e aplica velocidade vertical
 func _handle_jump(delta: float) -> void:
+	buffer_timer -= max(0.0, buffer_timer - delta)
+	if Input.is_action_just_pressed("jump"):
+		buffer_timer = jump_buffer_time
+		
+	if is_on_floor() and buffer_timer > 0:
+		velocity.y = jump_velocity
+		buffer_timer = 0.0
+
+	
 	if is_on_floor():
 		coyote_timer = coyote_time
 	else:
@@ -42,6 +54,8 @@ func _handle_jump(delta: float) -> void:
 	if Input.is_action_just_pressed("jump") and coyote_timer > 0:
 		velocity.y = jump_velocity
 		coyote_timer = 0.0
+		
+	
 
 
 ## Movimento lateral baseado no input
