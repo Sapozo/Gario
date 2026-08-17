@@ -35,3 +35,18 @@ position = Vector2(1587, 741)
 
 [node name="Coin4" parent="Collectables" unique_id=1956808991 instance=ExtResource("3_6miv3")]
 position = Vector2(1949, 725)
+
+[node name="Coin5" parent="Collectables" unique_id=950204710 instance=ExtResource("3_6miv3")]
+position = Vector2(2262, 629)
+
+[node name="Coin6" parent="Collectables" unique_id=552544628 instance=ExtResource("3_6miv3")]
+position = Vector2(2348, 637)
+
+[node name="Coin7" parent="Collectables" unique_id=1048275319 instance=ExtResource("3_6miv3")]
+position = Vector2(2416, 636)
+
+[node name="Coin8" parent="Collectables" unique_id=1288078091 instance=ExtResource("3_6miv3")]
+position = Vector2(2534, 582)
+
+[node name="Coin9" parent="Collectables" unique_id=930167026 instance=ExtResource("3_6miv3")]
+position = Vector2(2711, 524)
