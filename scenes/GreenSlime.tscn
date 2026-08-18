@@ -1,0 +1,47 @@
+[gd_scene format=3 uid="uid://bs67wgj220t2m"]
+
+[ext_resource type="Texture2D" uid="uid://01nan4a4bou3" path="res://assets/enemies/green_slime_walk.png" id="1_3gvst"]
+[ext_resource type="Script" uid="uid://b3u2mmqxjuj6j" path="res://scripts/GreenSlime.gd" id="1_rx8ca"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_55jtl"]
+atlas = ExtResource("1_3gvst")
+region = Rect2(0, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mpr68"]
+atlas = ExtResource("1_3gvst")
+region = Rect2(24, 0, 24, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_wgif1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_55jtl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mpr68")
+}],
+"loop": 1,
+"name": &"walk",
+"speed": 2.5
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8f0iq"]
+size = Vector2(13, 19)
+
+[node name="GreenSlime" type="CharacterBody2D" unique_id=2032650617]
+script = ExtResource("1_rx8ca")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1518504826]
+sprite_frames = SubResource("SpriteFrames_wgif1")
+animation = &"walk"
+autoplay = "walk"
+frame_progress = 0.26981363
+offset = Vector2(0, -12)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2130919045]
+position = Vector2(0, -10.5)
+shape = SubResource("RectangleShape2D_8f0iq")
+
+[node name="EdgeDetector" type="RayCast2D" parent="." unique_id=2077682823]
+position = Vector2(-14, -15)
+target_position = Vector2(0, 20)
