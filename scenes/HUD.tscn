@@ -2,6 +2,8 @@
 
 [ext_resource type="Script" uid="uid://c2o7rw0gvdqdh" path="res://scripts/HUD.gd" id="1_fls4u"]
 [ext_resource type="Texture2D" uid="uid://bjbsis5dm2ruj" path="res://assets/collectables/animated_coin.png" id="1_qpvh6"]
+[ext_resource type="Texture2D" uid="uid://b66dq6aaw6lni" path="res://assets/hud/healthbar_under.png" id="3_7hsmw"]
+[ext_resource type="Texture2D" uid="uid://cuqi5wkgo16cm" path="res://assets/hud/healthbar_progress.png" id="4_nysna"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wgif1"]
 atlas = ExtResource("1_qpvh6")
@@ -31,3 +33,16 @@ theme_override_constants/shadow_offset_y = 10
 theme_override_constants/outline_size = 5
 theme_override_font_sizes/font_size = 32
 text = "0"
+
+[node name="HealthBar" type="TextureProgressBar" parent="." unique_id=1231428400]
+offset_left = -29.0
+offset_top = 148.0
+offset_right = 35.0
+offset_bottom = 212.0
+scale = Vector2(3, 3)
+max_value = 20.0
+value = 20.0
+fill_mode = 3
+texture_under = ExtResource("3_7hsmw")
+texture_progress = ExtResource("4_nysna")
+texture_progress_offset = Vector2(0, 5)

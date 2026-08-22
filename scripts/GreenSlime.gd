@@ -9,21 +9,27 @@ extends CharacterBody2D
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 # Referência ao node do RayCast2D
 @onready var edge_detector: RayCast2D = $EdgeDetector
+# Referência ao node HurtBox
+@onready var hurt_box: HurtBox = $HurtBox
+# HEALTH COMPONENT
+@onready var health_component: HealthComponent = $HealthComponent
+
 
 # Direção
 var direction: int = 1
-# Tratamento para o 'flip-flop' 
-var can_change_direction: bool = true
 
 
 
 func _ready() -> void:
 	edge_detector.position.x = 15 * direction
 	edge_detector.force_raycast_update()
+	hurt_box.hurt.connect(_on_hurtbox_hurt)
+	health_component.died.connect(_die)
 
 
 
 func _physics_process(delta: float) -> void:
+	
 	_apply_gravity(delta)
 	_change_direction()
 	_movement()
@@ -49,15 +55,18 @@ func _change_direction() -> void:
 	edge_detector.position.x = 15 * direction
 	edge_detector.force_raycast_update()
 	
-	print("--- CHANGE DIR ---")
-	print("direction: ", direction, " | raycast.x: ", edge_detector.position.x)
-	print("is_on_floor: ", is_on_floor(), " | is_colliding: ", edge_detector.is_colliding())
-	print("global_pos: ", global_position)
-	
-	if is_on_floor():
-		if edge_detector.is_colliding() == false:
-			print(">>> INVERTEU por buraco!")
+	if is_on_floor() and not edge_detector.is_colliding():
 			direction = -direction
 	elif is_on_wall():
-		print(">>> INVERTEU por parede!")
 		direction = -direction
+
+
+# Função para matar o enemy
+func _die() -> void:
+	print("Morri!")
+	queue_free()
+
+
+# Função que detecta sinal 'hurt' da HurtBox
+func _on_hurtbox_hurt(amount: int, _hit_position: Vector2) -> void:
+	health_component.take_damage(amount)

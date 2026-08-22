@@ -1,5 +1,6 @@
 extends CharacterBody2D
 
+
 # Velocidade horizontal em pixels por segundo
 @export var speed: float = 300.0
 # Força inicial do pulo (negativa porque Y cresce para BAIXO no Godot 2D)
@@ -12,13 +13,24 @@ extends CharacterBody2D
 @export var jump_buffer_time: float = 0.1
 # Base do Variable Jump Height
 @export var jump_cut_multiplier: float = 0.3
+# Stomp Bounce
+@export var stomp_bounce_velocity: float = -300.0
+
 
 # Referência do nó dentro do código
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
+# Referência ao HITBOX do PLAYER
+@onready var stomp_hitbox: Area2D = $StompHitbox
+
 
 var coyote_timer: float = 0.0
 var buffer_timer: float = 0.0
 
+
+
+# Função de início da cena
+func _ready() -> void:
+	stomp_hitbox.area_entered.connect(_on_stomp_hitbox_area_entered)
 
 
 ## Função de física — executada em intervalos fixos (60x/seg por padrão)
@@ -89,6 +101,14 @@ func _handle_animation() -> void:
 			animated_sprite.play("fall")
 
 
+# Detecta a colisão de áreas 2D com a hitbox. 
+func _on_stomp_hitbox_area_entered(area: Area2D) -> void:
+	print("STOMP! Area ENTERED:", area.name)
+	if area is HurtBox:
+		area.take_hit()
+		_perform_stomp_bounce()
 
-	
-	
+
+# Performa o Stomp Bounce
+func _perform_stomp_bounce() -> void:
+	velocity.y = stomp_bounce_velocity

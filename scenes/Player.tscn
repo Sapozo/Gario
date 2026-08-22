@@ -57,8 +57,12 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o4126"]
 size = Vector2(40, 75)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wgif1"]
+size = Vector2(40, 5)
+
 [node name="Player" type="CharacterBody2D" unique_id=792846141 groups=["player"]]
 scale = Vector2(0.6, 0.6)
+collision_layer = 2
 script = ExtResource("1_cw2d6")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=400875681]
@@ -70,3 +74,13 @@ offset = Vector2(0, -55)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=681863232]
 position = Vector2(0, -37.5)
 shape = SubResource("RectangleShape2D_o4126")
+
+[node name="StompHitbox" type="Area2D" parent="." unique_id=938715157]
+collision_layer = 64
+collision_mask = 32
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StompHitbox" unique_id=670696828]
+position = Vector2(0, 2.5)
+shape = SubResource("RectangleShape2D_wgif1")
+debug_color = Color(0.29717046, 0.62005943, 0.311431, 0.41960785)
