@@ -156,6 +156,7 @@ func _handle_shoot() -> void:
 			if charge_timer >= charge_time_lvl3:
 				_trigger_shot_animation()
 				_fire_bullet(3) # Dispara Tiro Nível 3!
+				GameState.request_camera_shake(0.4)
 			elif charge_timer >= charge_time_lvl2:
 				_trigger_shot_animation()
 				_fire_bullet(2) # Dispara Tiro Nível 2!
@@ -300,6 +301,7 @@ func _on_hurtbox_hurt(amount: int, hit_position: Vector2) -> void:
 		animated_sprite.play("hurt")
 		is_charging = false
 		is_shooting = false
+		GameState.request_camera_shake(0.6)
 	
 	if is_dead == false:
 		var dir: float = 1.0

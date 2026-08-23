@@ -5,6 +5,9 @@
 [ext_resource type="Script" uid="uid://bc5tkadgv4qs1" path="res://scripts/components/HurtBox.gd" id="3_qwrnd"]
 [ext_resource type="Script" uid="uid://cusl2lf44kfii" path="res://scripts/components/HealthComponent.gd" id="4_6rwj6"]
 [ext_resource type="Script" uid="uid://d1lofh5x4hy71" path="res://scripts/components/HitBox.gd" id="5_tdtti"]
+[ext_resource type="Script" uid="uid://dl21dxespe8ec" path="res://scripts/components/LootDropComponent.gd" id="6_qsmut"]
+[ext_resource type="PackedScene" uid="uid://dri2q13mdcfl8" path="res://scenes/HealingOrb.tscn" id="7_300eu"]
+[ext_resource type="PackedScene" uid="uid://dq6pqhqipxgbb" path="res://scenes/Coin.tscn" id="8_ug1lq"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_55jtl"]
 atlas = ExtResource("1_3gvst")
@@ -41,6 +44,8 @@ size = Vector2(18.46154, 17.69231)
 scale = Vector2(1.3, 1.3)
 collision_layer = 4
 script = ExtResource("1_rx8ca")
+speed = null
+gravity = null
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1518504826]
 sprite_frames = SubResource("SpriteFrames_wgif1")
@@ -69,9 +74,6 @@ position = Vector2(-4.3098763e-07, -11.384617)
 shape = SubResource("RectangleShape2D_wgif1")
 debug_color = Color(0.9626513, 0.15150121, 0.31857756, 0.41960785)
 
-[node name="HealthComponent" type="Node" parent="." unique_id=273954431]
-script = ExtResource("4_6rwj6")
-
 [node name="HitBox" type="Area2D" parent="." unique_id=510154945]
 collision_layer = 16
 collision_mask = 8
@@ -83,3 +85,13 @@ damage = 3
 position = Vector2(2.2924866e-08, -8.076923)
 shape = SubResource("RectangleShape2D_kqlpm")
 debug_color = Color(0.20818955, 0.62890476, 0.35623154, 0.41960785)
+
+[node name="Components" type="Node" parent="." unique_id=1057077668]
+
+[node name="HealthComponent" type="Node" parent="Components" unique_id=273954431]
+script = ExtResource("4_6rwj6")
+
+[node name="LootDropComponent" type="Node2D" parent="Components" unique_id=1344453222]
+script = ExtResource("6_qsmut")
+item_1 = ExtResource("7_300eu")
+item_2 = ExtResource("8_ug1lq")

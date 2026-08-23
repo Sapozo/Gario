@@ -2,6 +2,7 @@ extends Node
 
 signal coins_changed(new_total: int)
 signal player_health_changed(current_hp: int, max_hp: int)
+signal camera_shake_request(amount: float)
 
 var coins: int = 0
 
@@ -15,3 +16,7 @@ func add_coins(amount: int) -> void:
 
 func update_player_health(current_hp: int, max_hp: int) -> void:
 	player_health_changed.emit(current_hp, max_hp)
+
+
+func request_camera_shake(amount: float) -> void:
+	camera_shake_request.emit(amount)

@@ -17,7 +17,7 @@ func _ready() -> void:
 func take_damage(amount: int) -> void:
 	current_health = max(0, current_health - amount)
 	if current_health > 0:
-		print(get_parent().name, " tomou ", amount, " de dano! HP: ", current_health)
+		print(owner.name, " tomou ", amount, " de dano! HP: ", current_health)
 		_on_health_changed()
 	else:
 		_on_health_changed()

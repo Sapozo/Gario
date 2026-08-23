@@ -12,7 +12,9 @@ extends CharacterBody2D
 # Referência ao node HurtBox
 @onready var hurt_box: HurtBox = $HurtBox
 # HEALTH COMPONENT
-@onready var health_component: HealthComponent = $HealthComponent
+@onready var health_component: HealthComponent = $Components/HealthComponent
+# RANDOM LOOT DROP
+@onready var loot_drop_component: LootDropComponent = $Components/LootDropComponent
 
 
 # Direção
@@ -63,7 +65,7 @@ func _change_direction() -> void:
 
 # Função para matar o enemy
 func _die() -> void:
-	print("Morri!")
+	loot_drop_component.drop_loot(global_position)
 	queue_free()
 
 
