@@ -1,0 +1,3 @@
+[gd_scene format=3 uid="uid://sfkmgeruhceu"]
+
+[node name="LevelGoal" type="Area2D" unique_id=1480798520]
