@@ -38,7 +38,7 @@ func _on_body_entered(_node: Node2D) -> void:
 func setup_charge(tier: int) -> void:
 	match tier:
 		1: # Tiro Normal
-			damage = 1
+			damage = 10
 			scale = Vector2(1.0, 1.0)
 		2: # Tiro Médio
 			damage = 3

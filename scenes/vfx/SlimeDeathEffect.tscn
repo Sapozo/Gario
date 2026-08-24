@@ -25,4 +25,5 @@ script = ExtResource("1_mfa7t")
 
 [node name="DeathSFX" type="AudioStreamPlayer2D" parent="." unique_id=2006460886]
 stream = ExtResource("2_7igp7")
-volume_db = -15.0
+volume_db = -11.0
+bus = &"SFX"

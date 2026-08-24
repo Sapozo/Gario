@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dlkl45q8nyd56" path="res://scripts/autoloads/GameState.gd" id="1_4k0ew"]
 [ext_resource type="AudioStream" uid="uid://co0b8k5wg4bl2" path="res://audio/sfx/coin.wav" id="2_ppnic"]
+[ext_resource type="AudioStream" uid="uid://cea3mj85q65aw" path="res://audio/sfx/healing_orb.wav" id="3_ppnic"]
 
 [node name="GameState" type="Node" unique_id=508901588]
 script = ExtResource("1_4k0ew")
@@ -10,4 +11,9 @@ script = ExtResource("1_4k0ew")
 
 [node name="Coin" type="AudioStreamPlayer" parent="SFX" unique_id=1251537676]
 stream = ExtResource("2_ppnic")
+volume_db = -3.0
 bus = &"SFX"
+
+[node name="HealingOrb" type="AudioStreamPlayer" parent="SFX" unique_id=1948356743]
+stream = ExtResource("3_ppnic")
+volume_db = -12.0

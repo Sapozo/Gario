@@ -37,9 +37,13 @@ const BULLET_SCENE := preload("res://scenes/Bullet.tscn")
 # HEALH COMPONENT
 @onready var health_component: HealthComponent = $HealthComponent
 # SFX dos tiros
-@onready var shoot_1: AudioStreamPlayer2D = $Shoot1
-@onready var shoot_2: AudioStreamPlayer2D = $Shoot2
-@onready var shoot_3: AudioStreamPlayer2D = $Shoot3
+@onready var shoot_1: AudioStreamPlayer2D = $SFX/Shoot1
+@onready var shoot_2: AudioStreamPlayer2D = $SFX/Shoot2
+@onready var shoot_3: AudioStreamPlayer2D = $SFX/Shoot3
+@onready var jump: AudioStreamPlayer2D = $SFX/Jump
+@onready var land: AudioStreamPlayer2D = $SFX/Land
+@onready var hurt: AudioStreamPlayer2D = $SFX/Hurt
+@onready var charging: AudioStreamPlayer2D = $SFX/Charging
 
 
 
@@ -123,6 +127,8 @@ func _perform_jump() -> void:
 	buffer_timer = 0.0
 	is_landing = false
 	land_timer = 0.0
+	jump.pitch_scale = randf_range(0.90, 1.10)
+	jump.play()
 
 
 ## Movimento lateral baseado no input
@@ -142,24 +148,31 @@ func _handle_shoot() -> void:
 		return
 	if is_hurt == true:
 		return
+	
 	# 1. Pressionou 'K' no primeiro frame (Tiro rápido imediato)
 	if Input.is_action_just_pressed("shot"):
 		_trigger_shot_animation()
 		_fire_bullet(1)
+		charging.stop()
 		shoot_1.pitch_scale = randf_range(0.9, 1.1)
 		shoot_1.play()
 		charge_timer = 0.0
 		is_charging = true
-
+	
 	# 2. Segurando 'K' (Acumula o tempo de carga)
 	elif Input.is_action_pressed("shot"):
 		if is_charging:
 			charge_timer += get_physics_process_delta_time()
 			# (Futuro: Aqui adicionaremos um efeito visual/piscar do TechMan enquanto carrega!)
-
+			if charging.is_playing():
+				return
+			else:
+				charging.play()
+	
 	# 3. Soltou 'K' (Dispara o tiro carregado, se houver carga)
 	elif Input.is_action_just_released("shot"):
 		if is_charging:
+			charging.stop()
 			if charge_timer >= charge_time_lvl3:
 				_trigger_shot_animation()
 				_fire_bullet(3) # Dispara Tiro Nível 3!
@@ -174,7 +187,6 @@ func _handle_shoot() -> void:
 			# Reseta os controles de carga
 			charge_timer = 0.0
 			is_charging = false
-
 
 
 # Realiza a troca das sprites de forma 'animada' e interativa
@@ -218,6 +230,8 @@ func _handle_animation() -> void:
 	if not is_landing:
 		if is_on_floor() and not was_on_floor:
 			animated_sprite.play("land")
+			land.pitch_scale = randf_range(0.90, 1.10)
+			land.play()
 			is_landing = true
 			land_timer = land_anim_time
 
@@ -302,6 +316,7 @@ func _on_hurtbox_hurt(amount: int, hit_position: Vector2) -> void:
 	if is_invincible == true:
 		return
 	else:
+		charging.stop()
 		health_component.take_damage(amount)
 		is_invincible = true
 		invincibility_timer = invincibility_time
@@ -309,6 +324,8 @@ func _on_hurtbox_hurt(amount: int, hit_position: Vector2) -> void:
 		hurt_timer = hurt_anim_time
 		animated_sprite.stop()
 		animated_sprite.play("hurt")
+		hurt.pitch_scale = randf_range(0.90, 1.10)
+		hurt.play()
 		is_charging = false
 		is_shooting = false
 		GameState.request_camera_shake(0.6)
@@ -350,6 +367,7 @@ func _on_health_changed(new_health: int) -> void:
 
 
 func _on_health_component_died() -> void:
+	charging.stop()
 	is_dead = true
 	velocity = Vector2.ZERO
 	hurt_box.set_deferred("monitorable", false)

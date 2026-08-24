@@ -31,6 +31,7 @@ func heal(amount: int) -> bool:
 		current_health = min(max_health, current_health + amount)
 		print(get_parent().name, " healou ", amount, " de vida! HP: ", current_health)
 		_on_health_changed()
+		GameState.healing_orb.play()
 		return true
 	
 func _on_health_changed() -> void:

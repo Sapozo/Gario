@@ -94,7 +94,7 @@ height = 10.0
 
 [node name="Bullet" type="Area2D" unique_id=517894388]
 collision_layer = 64
-collision_mask = 33
+collision_mask = 32
 script = ExtResource("1_p1sfj")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=651923676]

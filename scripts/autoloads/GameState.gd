@@ -6,6 +6,7 @@ signal camera_shake_request(amount: float)
 
 # SFX - Coin
 @onready var coin: AudioStreamPlayer = $SFX/Coin
+@onready var healing_orb: AudioStreamPlayer = $SFX/HealingOrb
 
 
 var coins: int = 0

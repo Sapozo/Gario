@@ -116,5 +116,6 @@ position = Vector2(4295, 348)
 
 [node name="LevelBGM" type="AudioStreamPlayer" parent="." unique_id=120498574]
 stream = ExtResource("8_ewkxc")
+volume_db = -7.0
 autoplay = true
 bus = &"BGM"

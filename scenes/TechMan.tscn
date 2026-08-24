@@ -13,6 +13,10 @@
 [ext_resource type="AudioStream" uid="uid://c73aktyuui1xl" path="res://audio/sfx/shot_1.wav" id="11_c6dn1"]
 [ext_resource type="AudioStream" uid="uid://c41rjhd2fjf3a" path="res://audio/sfx/shot_2.wav" id="12_y4e4x"]
 [ext_resource type="AudioStream" uid="uid://5k3vcov1upn8" path="res://audio/sfx/shot_3.wav" id="13_x2dal"]
+[ext_resource type="AudioStream" uid="uid://c24v417neclqv" path="res://audio/sfx/jump.wav" id="14_vda6n"]
+[ext_resource type="AudioStream" uid="uid://dbhh8dg81h2ei" path="res://audio/sfx/land.wav" id="15_sgxur"]
+[ext_resource type="AudioStream" uid="uid://d3udrbeywqp1h" path="res://audio/sfx/hurt.wav" id="16_o0ppi"]
+[ext_resource type="AudioStream" uid="uid://c7ssxjie6x1u7" path="res://audio/sfx/charging.wav" id="17_pnc5j"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_piwhv"]
 atlas = ExtResource("2_kr8yp")
@@ -322,7 +326,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tb6no"]
-size = Vector2(20, 42)
+size = Vector2(20, 47)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wgif1"]
 size = Vector2(18, 40)
@@ -338,7 +342,7 @@ animation = &"hurt"
 autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=651111473]
-position = Vector2(0, 3)
+position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_tb6no")
 
 [node name="Muzzle" type="Marker2D" parent="." unique_id=690995594]
@@ -359,17 +363,36 @@ debug_color = Color(0.8888389, 0.30520257, 0.32070455, 0.41960785)
 script = ExtResource("9_kr8yp")
 max_health = 20
 
-[node name="Shoot1" type="AudioStreamPlayer2D" parent="." unique_id=2104103807]
+[node name="SFX" type="Node2D" parent="." unique_id=1186451158]
+
+[node name="Shoot1" type="AudioStreamPlayer2D" parent="SFX" unique_id=2104103807]
 stream = ExtResource("11_c6dn1")
-volume_db = -15.0
+volume_db = -14.5
 bus = &"SFX"
 
-[node name="Shoot2" type="AudioStreamPlayer2D" parent="." unique_id=2042288952]
+[node name="Shoot2" type="AudioStreamPlayer2D" parent="SFX" unique_id=2042288952]
 stream = ExtResource("12_y4e4x")
 volume_db = -10.0
 bus = &"SFX"
 
-[node name="Shoot3" type="AudioStreamPlayer2D" parent="." unique_id=691640696]
+[node name="Shoot3" type="AudioStreamPlayer2D" parent="SFX" unique_id=691640696]
 stream = ExtResource("13_x2dal")
+volume_db = -10.0
+bus = &"SFX"
+
+[node name="Jump" type="AudioStreamPlayer2D" parent="SFX" unique_id=124960721]
+stream = ExtResource("14_vda6n")
+bus = &"SFX"
+
+[node name="Land" type="AudioStreamPlayer2D" parent="SFX" unique_id=120105032]
+stream = ExtResource("15_sgxur")
+bus = &"SFX"
+
+[node name="Hurt" type="AudioStreamPlayer2D" parent="SFX" unique_id=1329150839]
+stream = ExtResource("16_o0ppi")
+bus = &"SFX"
+
+[node name="Charging" type="AudioStreamPlayer2D" parent="SFX" unique_id=1049122954]
+stream = ExtResource("17_pnc5j")
 volume_db = -10.0
 bus = &"SFX"
