@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://cvgjv7280b3g" path="res://scripts/Camera2D.gd" id="3_geu2c"]
 [ext_resource type="PackedScene" uid="uid://dri2q13mdcfl8" path="res://scenes/HealingOrb.tscn" id="4_mca4d"]
 [ext_resource type="PackedScene" uid="uid://dl226wyxw7rfy" path="res://scenes/HUD.tscn" id="4_ulfjo"]
+[ext_resource type="AudioStream" uid="uid://bkwyxrl8omypk" path="res://audio/bgm/Apex_Sprint.ogg" id="8_ewkxc"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6miv3"]
 texture = ExtResource("1_r2bhp")
@@ -112,3 +113,8 @@ position = Vector2(3545.0002, 122.00001)
 position = Vector2(4295, 348)
 
 [node name="HUD" parent="." unique_id=880628774 instance=ExtResource("4_ulfjo")]
+
+[node name="LevelBGM" type="AudioStreamPlayer" parent="." unique_id=120498574]
+stream = ExtResource("8_ewkxc")
+autoplay = true
+bus = &"BGM"

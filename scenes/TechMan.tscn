@@ -10,6 +10,9 @@
 [ext_resource type="Texture2D" uid="uid://c56ruragiwggj" path="res://assets/character/TechMan Walk.png" id="6_piwhv"]
 [ext_resource type="Script" uid="uid://bc5tkadgv4qs1" path="res://scripts/components/HurtBox.gd" id="8_afje5"]
 [ext_resource type="Script" uid="uid://cusl2lf44kfii" path="res://scripts/components/HealthComponent.gd" id="9_kr8yp"]
+[ext_resource type="AudioStream" uid="uid://c73aktyuui1xl" path="res://audio/sfx/shot_1.wav" id="11_c6dn1"]
+[ext_resource type="AudioStream" uid="uid://c41rjhd2fjf3a" path="res://audio/sfx/shot_2.wav" id="12_y4e4x"]
+[ext_resource type="AudioStream" uid="uid://5k3vcov1upn8" path="res://audio/sfx/shot_3.wav" id="13_x2dal"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_piwhv"]
 atlas = ExtResource("2_kr8yp")
@@ -355,3 +358,18 @@ debug_color = Color(0.8888389, 0.30520257, 0.32070455, 0.41960785)
 [node name="HealthComponent" type="Node" parent="." unique_id=1115535112]
 script = ExtResource("9_kr8yp")
 max_health = 20
+
+[node name="Shoot1" type="AudioStreamPlayer2D" parent="." unique_id=2104103807]
+stream = ExtResource("11_c6dn1")
+volume_db = -15.0
+bus = &"SFX"
+
+[node name="Shoot2" type="AudioStreamPlayer2D" parent="." unique_id=2042288952]
+stream = ExtResource("12_y4e4x")
+volume_db = -10.0
+bus = &"SFX"
+
+[node name="Shoot3" type="AudioStreamPlayer2D" parent="." unique_id=691640696]
+stream = ExtResource("13_x2dal")
+volume_db = -10.0
+bus = &"SFX"

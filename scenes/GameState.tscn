@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://b1cljcw6mrxw3"]
+
+[ext_resource type="Script" uid="uid://dlkl45q8nyd56" path="res://scripts/autoloads/GameState.gd" id="1_4k0ew"]
+[ext_resource type="AudioStream" uid="uid://co0b8k5wg4bl2" path="res://audio/sfx/coin.wav" id="2_ppnic"]
+
+[node name="GameState" type="Node" unique_id=508901588]
+script = ExtResource("1_4k0ew")
+
+[node name="SFX" type="Node" parent="." unique_id=1553551613]
+
+[node name="Coin" type="AudioStreamPlayer" parent="SFX" unique_id=1251537676]
+stream = ExtResource("2_ppnic")
+bus = &"SFX"

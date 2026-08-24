@@ -4,6 +4,8 @@ extends CharacterBody2D
 @export var speed: float = 60.0
 # Gravidade
 @export var gravity: float = 980.0
+# Partículas de morte
+@export var slime_death_effect: PackedScene
 
 # Referência ao node da sprite
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
@@ -66,7 +68,13 @@ func _change_direction() -> void:
 # Função para matar o enemy
 func _die() -> void:
 	loot_drop_component.drop_loot(global_position)
-	queue_free()
+	if slime_death_effect != null:
+		var effect = slime_death_effect.instantiate()
+		effect.global_position = global_position
+		get_tree().current_scene.call_deferred("add_child", effect)
+		GameState.request_camera_shake(0.2)
+		GameState.freeze_time(0.03)
+		queue_free()
 
 
 # Função que detecta sinal 'hurt' da HurtBox

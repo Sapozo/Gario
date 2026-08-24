@@ -36,6 +36,11 @@ const BULLET_SCENE := preload("res://scenes/Bullet.tscn")
 @onready var hurt_box: HurtBox = $HurtBox
 # HEALH COMPONENT
 @onready var health_component: HealthComponent = $HealthComponent
+# SFX dos tiros
+@onready var shoot_1: AudioStreamPlayer2D = $Shoot1
+@onready var shoot_2: AudioStreamPlayer2D = $Shoot2
+@onready var shoot_3: AudioStreamPlayer2D = $Shoot3
+
 
 
 var coyote_timer: float = 0.0
@@ -141,6 +146,8 @@ func _handle_shoot() -> void:
 	if Input.is_action_just_pressed("shot"):
 		_trigger_shot_animation()
 		_fire_bullet(1)
+		shoot_1.pitch_scale = randf_range(0.9, 1.1)
+		shoot_1.play()
 		charge_timer = 0.0
 		is_charging = true
 
@@ -156,10 +163,13 @@ func _handle_shoot() -> void:
 			if charge_timer >= charge_time_lvl3:
 				_trigger_shot_animation()
 				_fire_bullet(3) # Dispara Tiro Nível 3!
+				shoot_3.play()
 				GameState.request_camera_shake(0.4)
+				GameState.freeze_time(0.03)
 			elif charge_timer >= charge_time_lvl2:
 				_trigger_shot_animation()
 				_fire_bullet(2) # Dispara Tiro Nível 2!
+				shoot_2.play()
 			
 			# Reseta os controles de carga
 			charge_timer = 0.0
@@ -302,6 +312,7 @@ func _on_hurtbox_hurt(amount: int, hit_position: Vector2) -> void:
 		is_charging = false
 		is_shooting = false
 		GameState.request_camera_shake(0.6)
+		GameState.freeze_time(0.05)
 	
 	if is_dead == false:
 		var dir: float = 1.0

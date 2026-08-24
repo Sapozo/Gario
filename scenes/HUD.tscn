@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dl226wyxw7rfy"]
 
 [ext_resource type="Script" uid="uid://c2o7rw0gvdqdh" path="res://scripts/HUD.gd" id="1_fls4u"]
-[ext_resource type="Texture2D" uid="uid://bjbsis5dm2ruj" path="res://assets/collectables/animated_coin.png" id="1_qpvh6"]
+[ext_resource type="Texture2D" uid="uid://b4whf41l4h8sc" path="res://assets/collectables/animated_coin.png" id="1_qpvh6"]
 [ext_resource type="Texture2D" uid="uid://b66dq6aaw6lni" path="res://assets/hud/healthbar_under.png" id="3_7hsmw"]
 [ext_resource type="Texture2D" uid="uid://cuqi5wkgo16cm" path="res://assets/hud/healthbar_progress.png" id="4_nysna"]
 

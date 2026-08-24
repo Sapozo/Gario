@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://bb73u6yn1s2pi"]
+
+[ext_resource type="Script" uid="uid://bayes5klsrua4" path="res://scripts/components/SlimeDeathEffect.gd" id="1_mfa7t"]
+[ext_resource type="AudioStream" uid="uid://ik5bb1so1lf1" path="res://audio/sfx/slime_000.wav" id="2_7igp7"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_wgif1"]
+particle_flag_disable_z = true
+direction = Vector3(0, -1, 0)
+spread = 180.0
+initial_velocity_min = 130.0
+initial_velocity_max = 200.0
+gravity = Vector3(0, 400, 0)
+scale_min = 2.0
+scale_max = 4.0
+color = Color(0.34261632, 0.9999998, 0.23604977, 1)
+
+[node name="SlimeDeathEffect" type="GPUParticles2D" unique_id=540497858]
+emitting = false
+amount = 16
+lifetime = 0.62
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_wgif1")
+script = ExtResource("1_mfa7t")
+
+[node name="DeathSFX" type="AudioStreamPlayer2D" parent="." unique_id=2006460886]
+stream = ExtResource("2_7igp7")
+volume_db = -15.0
