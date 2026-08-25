@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://wyff3emdcdkp"]
+
+[ext_resource type="PackedScene" uid="uid://fmaqul6wnetl" path="res://levels/Level01.tscn" id="1_vvh5c"]
+[ext_resource type="PackedScene" uid="uid://b1cljcw6mrxw3" path="res://scenes/autoloads/GameState.tscn" id="2_28aoi"]
+[ext_resource type="PackedScene" uid="uid://cy4nsjsdfis4t" path="res://scenes/autoloads/SceneTransition.tscn" id="3_jnlp7"]
+
+[node name="root" type="Node" unique_id=1794838634]
+
+[node name="Level01" parent="." unique_id=1273800411 instance=ExtResource("1_vvh5c")]
+
+[node name="GameState" parent="." unique_id=508901588 instance=ExtResource("2_28aoi")]
+
+[node name="SceneTransition" parent="." unique_id=487193969 instance=ExtResource("3_jnlp7")]
