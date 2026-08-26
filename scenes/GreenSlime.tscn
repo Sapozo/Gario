@@ -9,6 +9,10 @@
 [ext_resource type="Script" uid="uid://dl21dxespe8ec" path="res://scripts/components/LootDropComponent.gd" id="6_qsmut"]
 [ext_resource type="PackedScene" uid="uid://dri2q13mdcfl8" path="res://scenes/HealingOrb.tscn" id="7_300eu"]
 [ext_resource type="PackedScene" uid="uid://dq6pqhqipxgbb" path="res://scenes/Coin.tscn" id="8_ug1lq"]
+[ext_resource type="Script" uid="uid://c8tcm6qg4dtkx" path="res://scripts/state_machine/StateMachine.gd" id="10_hi00n"]
+[ext_resource type="Script" uid="uid://cd6633jq0i5to" path="res://scripts/state_machine/PatrolState.gd" id="11_co1nf"]
+[ext_resource type="Script" uid="uid://bow6vj6kthlx" path="res://scripts/state_machine/ChaseState.gd" id="12_co1nf"]
+[ext_resource type="Script" uid="uid://ceyexb0fgq8py" path="res://scripts/state_machine/HurtState.gd" id="13_hnfey"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_55jtl"]
 atlas = ExtResource("1_3gvst")
@@ -41,6 +45,9 @@ size = Vector2(16.923077, 21.23077)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kqlpm"]
 size = Vector2(18.46154, 17.69231)
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_wgif1"]
+radius = 118.88288
+
 [node name="GreenSlime" type="CharacterBody2D" unique_id=2032650617 groups=["enemies"]]
 scale = Vector2(1.3, 1.3)
 collision_layer = 4
@@ -51,8 +58,7 @@ slime_death_effect = ExtResource("2_ug1lq")
 sprite_frames = SubResource("SpriteFrames_wgif1")
 animation = &"walk"
 autoplay = "walk"
-frame = 1
-frame_progress = 0.33736202
+frame_progress = 0.89188796
 offset = Vector2(0, -12)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2130919045]
@@ -86,12 +92,34 @@ position = Vector2(2.2924866e-08, -8.076923)
 shape = SubResource("RectangleShape2D_kqlpm")
 debug_color = Color(0.20818955, 0.62890476, 0.35623154, 0.41960785)
 
+[node name="VisionArea" type="Area2D" parent="." unique_id=1121968131]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="VisionArea" unique_id=1931532347]
+position = Vector2(0, -7.692309)
+shape = SubResource("CircleShape2D_wgif1")
+
 [node name="Components" type="Node" parent="." unique_id=1057077668]
 
 [node name="HealthComponent" type="Node" parent="Components" unique_id=273954431]
 script = ExtResource("4_6rwj6")
+max_health = 3
 
 [node name="LootDropComponent" type="Node2D" parent="Components" unique_id=1344453222]
 script = ExtResource("6_qsmut")
 item_1 = ExtResource("7_300eu")
 item_2 = ExtResource("8_ug1lq")
+
+[node name="StateMachine" type="Node" parent="." unique_id=1494547723 node_paths=PackedStringArray("inicial_state")]
+script = ExtResource("10_hi00n")
+inicial_state = NodePath("PatrolState")
+
+[node name="PatrolState" type="Node" parent="StateMachine" unique_id=1274912430]
+script = ExtResource("11_co1nf")
+
+[node name="ChaseState" type="Node" parent="StateMachine" unique_id=1504774712]
+script = ExtResource("12_co1nf")
+
+[node name="HurtState" type="Node" parent="StateMachine" unique_id=1129743469]
+script = ExtResource("13_hnfey")
