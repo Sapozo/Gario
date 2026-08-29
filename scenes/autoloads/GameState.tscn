@@ -4,6 +4,8 @@
 [ext_resource type="AudioStream" uid="uid://co0b8k5wg4bl2" path="res://audio/sfx/coin.wav" id="2_ppnic"]
 [ext_resource type="AudioStream" uid="uid://cea3mj85q65aw" path="res://audio/sfx/healing_orb.wav" id="3_ppnic"]
 [ext_resource type="AudioStream" uid="uid://dtxuyjjra7x3" path="res://audio/bgm/victory.wav" id="4_8rook"]
+[ext_resource type="AudioStream" uid="uid://bkwyxrl8omypk" path="res://audio/bgm/Apex_Sprint.ogg" id="5_vewv4"]
+[ext_resource type="AudioStream" uid="uid://62qopkf0d4mb" path="res://audio/bgm/Final_Corridor_Sprint.ogg" id="6_4fie2"]
 
 [node name="GameState" type="Node" unique_id=508901588]
 script = ExtResource("1_4k0ew")
@@ -22,8 +24,16 @@ bus = &"SFX"
 
 [node name="Victory" type="AudioStreamPlayer" parent="SFX" unique_id=686174714]
 stream = ExtResource("4_8rook")
-volume_db = -10.0
+volume_db = -13.0
 bus = &"SFX"
 
 [node name="BGMPlayer" type="AudioStreamPlayer" parent="." unique_id=1618760008]
 bus = &"BGM"
+
+[node name="ApexSprint" type="AudioStreamPlayer" parent="BGMPlayer" unique_id=1625514102]
+stream = ExtResource("5_vewv4")
+volume_db = -15.0
+
+[node name="FinalCorridorSprint" type="AudioStreamPlayer" parent="BGMPlayer" unique_id=85325045]
+stream = ExtResource("6_4fie2")
+volume_db = -18.0

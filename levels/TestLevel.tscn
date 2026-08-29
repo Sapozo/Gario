@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://do0gnoeifr73x" path="res://scenes/Bullet.tscn" id="1_yvpdy"]
 [ext_resource type="TileSet" uid="uid://dursyt7bitojo" path="res://assets/tiles/world_tileset.tres" id="2_yvpdy"]
 [ext_resource type="PackedScene" uid="uid://dq6pqhqipxgbb" path="res://scenes/Coin.tscn" id="3_qeqti"]
-[ext_resource type="PackedScene" uid="uid://bs67wgj220t2m" path="res://scenes/GreenSlime.tscn" id="4_bcaos"]
+[ext_resource type="PackedScene" uid="uid://bs67wgj220t2m" path="res://scenes/GreenRat.tscn" id="4_bcaos"]
 [ext_resource type="PackedScene" uid="uid://dl226wyxw7rfy" path="res://scenes/HUD.tscn" id="5_us3su"]
 [ext_resource type="PackedScene" uid="uid://d1towlxsaumnv" path="res://scenes/TechMan.tscn" id="6_yvpdy"]
 

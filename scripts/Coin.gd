@@ -11,7 +11,7 @@ var is_floating: bool
 
 
 func _ready() -> void:
-	collected.connect(GameState.add_coins)
+	collected.connect(GameState.add_level_coins)
 	base_y = position.y
 	var tween = create_tween()
 	# Animação momentânea de entrada do item, subindo e desacelerando

@@ -4,7 +4,7 @@ extends CharacterBody2D
 const BULLET_SCENE := preload("res://scenes/Bullet.tscn")
 
 # Velocidade horizontal em pixels por segundo
-@export var speed: float = 300.0
+@export var speed: float = 250.0
 # Força inicial do pulo (negativa porque Y cresce para BAIXO no Godot 2D)
 @export var jump_velocity: float = -400.0
 # Gravidade aplicada por segundo (positiva porque puxa para BAIXO)
@@ -101,6 +101,9 @@ func _apply_gravity(delta: float) -> void:
 func _handle_jump(delta: float) -> void:
 	if is_dead == true:
 		return
+	if Input.is_action_pressed("debug_fly"): ## DEBUG CONTROL
+		velocity.y = -250.0
+	
 	buffer_timer = max(0.0, buffer_timer - delta)
 	if Input.is_action_just_pressed("jump"):
 		buffer_timer = jump_buffer_time
@@ -338,6 +341,7 @@ func _on_hurtbox_hurt(amount: int, hit_position: Vector2) -> void:
 		velocity.x = dir * knowckback_force.x
 		velocity.y = knowckback_force.y
 	
+	
 	if is_dead == true and not animated_sprite.animation == "die":
 		animated_sprite.play("die")
 		return
@@ -375,6 +379,8 @@ func _on_health_component_died() -> void:
 	animated_sprite.play("die")
 	await get_tree().create_timer(2.5).timeout
 	get_tree().reload_current_scene()
+	GameState.coins = GameState.level_start_coins
+	GameState.level_coins = 0
 
 
 # Cura o TechMan

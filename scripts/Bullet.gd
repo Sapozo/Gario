@@ -41,10 +41,10 @@ func setup_charge(tier: int) -> void:
 			damage = 1
 			scale = Vector2(1.0, 1.0)
 		2: # Tiro Médio
-			damage = 3
+			damage = 2
 			scale = Vector2(2.2, 2.2)
 			speed = 700.0
 		3: # Super Tiro (Full Charge)
-			damage = 10
+			damage = 3
 			scale = Vector2(3.5 , 3.5)
 			speed = 800.0

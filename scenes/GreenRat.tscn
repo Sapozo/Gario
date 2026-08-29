@@ -1,10 +1,11 @@
 [gd_scene format=3 uid="uid://bs67wgj220t2m"]
 
 [ext_resource type="Texture2D" uid="uid://01nan4a4bou3" path="res://assets/enemies/green_slime_walk.png" id="1_3gvst"]
-[ext_resource type="Script" uid="uid://b3u2mmqxjuj6j" path="res://scripts/GreenSlime.gd" id="1_rx8ca"]
+[ext_resource type="Script" uid="uid://b3u2mmqxjuj6j" path="res://scripts/GreenRat.gd" id="1_rx8ca"]
 [ext_resource type="PackedScene" uid="uid://bb73u6yn1s2pi" path="res://scenes/vfx/SlimeDeathEffect.tscn" id="2_ug1lq"]
 [ext_resource type="Script" uid="uid://bc5tkadgv4qs1" path="res://scripts/components/HurtBox.gd" id="3_qwrnd"]
 [ext_resource type="Script" uid="uid://cusl2lf44kfii" path="res://scripts/components/HealthComponent.gd" id="4_6rwj6"]
+[ext_resource type="Texture2D" uid="uid://dvlanipd8isg3" path="res://assets/enemies/GreenRat.png" id="4_gkhgn"]
 [ext_resource type="Script" uid="uid://d1lofh5x4hy71" path="res://scripts/components/HitBox.gd" id="5_tdtti"]
 [ext_resource type="Script" uid="uid://dl21dxespe8ec" path="res://scripts/components/LootDropComponent.gd" id="6_qsmut"]
 [ext_resource type="PackedScene" uid="uid://dri2q13mdcfl8" path="res://scenes/HealingOrb.tscn" id="7_300eu"]
@@ -22,6 +23,14 @@ region = Rect2(0, 0, 24, 24)
 atlas = ExtResource("1_3gvst")
 region = Rect2(24, 0, 24, 24)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_8ito6"]
+atlas = ExtResource("4_gkhgn")
+region = Rect2(0, 0, 558, 443)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h383o"]
+atlas = ExtResource("4_gkhgn")
+region = Rect2(558, 0, 558, 443)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_wgif1"]
 animations = [{
 "frames": [{
@@ -32,42 +41,55 @@ animations = [{
 "texture": SubResource("AtlasTexture_mpr68")
 }],
 "loop": 1,
-"name": &"walk",
+"name": &"greenslime",
 "speed": 2.5
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8ito6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h383o")
+}],
+"loop": 1,
+"name": &"walk",
+"speed": 9.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_8f0iq"]
-size = Vector2(13, 16)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qd5dk"]
+size = Vector2(20, 25)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wgif1"]
-size = Vector2(16.923077, 21.23077)
+size = Vector2(26, 28)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kqlpm"]
-size = Vector2(18.46154, 17.69231)
+size = Vector2(28, 30)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_wgif1"]
-radius = 118.88288
+radius = 184.00026
 
-[node name="GreenSlime" type="CharacterBody2D" unique_id=2032650617 groups=["enemies"]]
-scale = Vector2(1.3, 1.3)
+[node name="GreenRat" type="CharacterBody2D" unique_id=2032650617 groups=["enemies"]]
 collision_layer = 4
+floor_stop_on_slope = false
 script = ExtResource("1_rx8ca")
 slime_death_effect = ExtResource("2_ug1lq")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1518504826]
+position = Vector2(2, -17)
+scale = Vector2(0.08, 0.08)
 sprite_frames = SubResource("SpriteFrames_wgif1")
 animation = &"walk"
 autoplay = "walk"
-frame_progress = 0.89188796
+frame_progress = 0.89142346
 offset = Vector2(0, -12)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2130919045]
-position = Vector2(0, -9)
-shape = SubResource("RectangleShape2D_8f0iq")
+position = Vector2(-2, -14.5)
+shape = SubResource("RectangleShape2D_qd5dk")
 
 [node name="EdgeDetector" type="RayCast2D" parent="." unique_id=2077682823]
-position = Vector2(-14, -15)
-target_position = Vector2(0, 20)
+position = Vector2(-15, -15)
+target_position = Vector2(0, 30)
 
 [node name="HurtBox" type="Area2D" parent="." unique_id=1664949448]
 collision_layer = 32
@@ -76,7 +98,7 @@ monitoring = false
 script = ExtResource("3_qwrnd")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=796161085]
-position = Vector2(-4.3098763e-07, -11.384617)
+position = Vector2(-2, -14)
 shape = SubResource("RectangleShape2D_wgif1")
 debug_color = Color(0.9626513, 0.15150121, 0.31857756, 0.41960785)
 
@@ -88,7 +110,7 @@ script = ExtResource("5_tdtti")
 damage = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" unique_id=165554969]
-position = Vector2(2.2924866e-08, -8.076923)
+position = Vector2(-2, -14)
 shape = SubResource("RectangleShape2D_kqlpm")
 debug_color = Color(0.20818955, 0.62890476, 0.35623154, 0.41960785)
 

@@ -11,10 +11,14 @@ var direction: int = -1
 
 
 func enter() -> void:
+	if target == null:
+		last_known_x = owner.global_position.x
+	
 	for body in owner.vision_area.get_overlapping_bodies():
 		if body.is_in_group("player"):
 			target = body
 			break
+	
 	owner.vision_area.body_exited.connect(_on_vision_body_exited)
 
 

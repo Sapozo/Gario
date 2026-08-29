@@ -4,24 +4,46 @@ signal coins_changed(new_total: int)
 signal player_health_changed(current_hp: int, max_hp: int)
 signal camera_shake_request(amount: float)
 
-# SFX - Coin
+# SFXs & BMGs
 @onready var coin: AudioStreamPlayer = $SFX/Coin
 @onready var healing_orb: AudioStreamPlayer = $SFX/HealingOrb
 @onready var victory: AudioStreamPlayer = $SFX/Victory
 @onready var bgm_player: AudioStreamPlayer = $BGMPlayer
+@onready var apex_sprint: AudioStreamPlayer = $BGMPlayer/ApexSprint
+@onready var final_corridor_sprint: AudioStreamPlayer = $BGMPlayer/FinalCorridorSprint
 
-
+var banked_coins: int = 0
 var coins: int = 0
+var level_start_coins: int
+var level_coins: int = 0
 
+func _ready() -> void:
+	level_start_coins = coins
+
+
+# CONTADOR DE COINS LOCAL DA FASE
+func add_level_coins(amount: int) -> void:
+	if amount > 0:
+		level_coins += amount
+		coins = banked_coins + level_coins
+		coin.pitch_scale = randf_range(0.95, 1.05)
+		coin.play()
+		coins_changed.emit(coins)
 
 
 # CONTADOR DE COINS GLOBAL DO JOGADOR
-func add_coins(amount: int) -> void:
+func add_coins(amount: int ) -> void:
 	if amount > 0:
 		coins += amount
 		coin.pitch_scale = randf_range(0.95, 1.05)
 		coin.play()
 		coins_changed.emit(coins)
+
+
+func bank_coins() -> void:
+		banked_coins = coins
+		level_start_coins = banked_coins
+		level_coins = 0
 
 
 # ATUALIZA HP NA HUD

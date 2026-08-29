@@ -16,5 +16,8 @@ func _on_body_entered(body: Node2D) -> void:
 			is_triggered = true
 			GameState.stop_bgm()
 			GameState.victory.play()
-			await get_tree().create_timer(0.5).timeout
-			SceneTransition.change_scene_with_fade(next_level_path, 1.0)
+			GameState.bank_coins()
+			await get_tree().create_timer(0.25).timeout
+			SceneTransition.change_scene_with_fade(next_level_path, 0.5)
+			
+			
